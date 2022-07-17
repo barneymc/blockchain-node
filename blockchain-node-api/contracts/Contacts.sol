@@ -23,7 +23,6 @@ contract Contacts {
    function getCount() public view returns (uint256){
   return count;
  }
- 
 
   function createContact(string memory _name, string memory _phone) public {
     emit MyEvent(msg.sender, 'Just created a contract in createContract()');

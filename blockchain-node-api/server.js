@@ -46,13 +46,20 @@ if (typeof web3 !== 'undefined') {
                 const testCOUNTER = await contactList.methods.getCount().call();
                 console.log('Counter now is ' + testCOUNTER);
                 response.json(testCOUNTER);
-                
+
         })
 
         app.get('/contacts/create',async(request, response) =>{
-
-
-
+                if (typeof window !== "undefined") {
+                        // browser code
+                        await window.ethereum.enable();
+                }
+                console.log('Create with params');
+                console.log(request);
+                const stuff=await contactList.methods.createContact('GG1',' Murphy2').send({from:'0x3aD966438610955c1f273a7BE4B43fcff1954433',gasPrice: '0xFF', gasLimit: '0x24A22'});
+                console.log("Added Gerry");
+                response.json("Updated");
+                
         })
 
         app.get('/contacts', async (request, response) => {
