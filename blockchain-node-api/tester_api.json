@@ -1,0 +1,150 @@
+[
+    {
+        "id": "1c3f162c.7f936a",
+        "type": "tab",
+        "label": "NodeAPI Server",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "c28fe8f4.9a2f18",
+        "type": "inject",
+        "z": "1c3f162c.7f936a",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 130,
+        "y": 120,
+        "wires": [
+            [
+                "a3a71bd3.e90858",
+                "f5868af8.e5dc18"
+            ]
+        ]
+    },
+    {
+        "id": "a3a71bd3.e90858",
+        "type": "http request",
+        "z": "1c3f162c.7f936a",
+        "name": "getContacts",
+        "method": "GET",
+        "ret": "obj",
+        "paytoqs": "ignore",
+        "url": "localhost:3001/contacts",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "authType": "",
+        "x": 370,
+        "y": 200,
+        "wires": [
+            [
+                "3e278ae8.b546c6"
+            ]
+        ]
+    },
+    {
+        "id": "3e278ae8.b546c6",
+        "type": "debug",
+        "z": "1c3f162c.7f936a",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 600,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "c81cd5ad.d816a8",
+        "type": "http request",
+        "z": "1c3f162c.7f936a",
+        "name": "updateContact",
+        "method": "GET",
+        "ret": "obj",
+        "paytoqs": "ignore",
+        "url": "localhost:3001/contacts/update",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "authType": "",
+        "x": 380,
+        "y": 260,
+        "wires": [
+            [
+                "87fc1914.d1d468"
+            ]
+        ]
+    },
+    {
+        "id": "87fc1914.d1d468",
+        "type": "debug",
+        "z": "1c3f162c.7f936a",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 600,
+        "y": 260,
+        "wires": []
+    },
+    {
+        "id": "f5868af8.e5dc18",
+        "type": "http request",
+        "z": "1c3f162c.7f936a",
+        "name": "getCount",
+        "method": "GET",
+        "ret": "obj",
+        "paytoqs": "ignore",
+        "url": "localhost:3001/contacts/getcount",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "authType": "",
+        "x": 390,
+        "y": 360,
+        "wires": [
+            [
+                "584bba8d.7875c4"
+            ]
+        ]
+    },
+    {
+        "id": "584bba8d.7875c4",
+        "type": "debug",
+        "z": "1c3f162c.7f936a",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 620,
+        "y": 360,
+        "wires": []
+    }
+]
