@@ -37,6 +37,18 @@ if (typeof web3 !== 'undefined') {
                 res.send('GET root request to the homepage')
               })
 
+
+        app.get('/contacts/getcount', async (request, response) => {
+                if (typeof window !== "undefined") {
+                        // browser code
+                        await window.ethereum.enable();
+                }
+                const testCOUNTER = await contactList.methods.getCount().call();
+                console.log('Counter now is ' + testCOUNTER);
+                response.write(testCOUNTER);
+        })
+
+
         app.get('/contacts', async (request, response) => {
                 if (typeof window !== "undefined") {
                         // browser code
