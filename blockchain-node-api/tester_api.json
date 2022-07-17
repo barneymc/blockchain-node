@@ -25,14 +25,15 @@
         "once": false,
         "onceDelay": 0.1,
         "topic": "",
-        "payload": "",
-        "payloadType": "date",
-        "x": 130,
+        "payload": "{\"val1\":\"G1\",\"val2\":\"G2\"}",
+        "payloadType": "json",
+        "x": 120,
         "y": 120,
         "wires": [
             [
                 "a3a71bd3.e90858",
-                "f5868af8.e5dc18"
+                "f5868af8.e5dc18",
+                "c81cd5ad.d816a8"
             ]
         ]
     },
@@ -80,8 +81,8 @@
         "name": "updateContact",
         "method": "GET",
         "ret": "obj",
-        "paytoqs": "ignore",
-        "url": "localhost:3001/contacts/update",
+        "paytoqs": "body",
+        "url": "localhost:3001/contacts/create",
         "tls": "",
         "persist": false,
         "proxy": "",
@@ -146,5 +147,35 @@
         "x": 620,
         "y": 360,
         "wires": []
+    },
+    {
+        "id": "9ab8b6fa.e23ef8",
+        "type": "inject",
+        "z": "1c3f162c.7f936a",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 130,
+        "y": 420,
+        "wires": [
+            [
+                "f5868af8.e5dc18",
+                "a3a71bd3.e90858"
+            ]
+        ]
     }
 ]
