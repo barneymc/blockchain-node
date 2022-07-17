@@ -45,9 +45,15 @@ if (typeof web3 !== 'undefined') {
                 }
                 const testCOUNTER = await contactList.methods.getCount().call();
                 console.log('Counter now is ' + testCOUNTER);
-                response.write(testCOUNTER);
+                response.json(testCOUNTER);
+                
         })
 
+        app.get('/contacts/create',async(request, response) =>{
+
+
+
+        })
 
         app.get('/contacts', async (request, response) => {
                 if (typeof window !== "undefined") {
