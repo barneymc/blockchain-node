@@ -32,18 +32,18 @@ if (typeof web3 !== 'undefined') {
               })
 
 
-        app.get('/contacts/update', async (request, response) =>{
-               // const COUNTER = await contactList.methods.count().call();
-                console.log('Called Contact update request for contactList so we can update..');
-                await contactList.methods.updateCount().send({from:'0x3aD966438610955c1f273a7BE4B43fcff1954433'});
-                console.log('updatedCount for contract');
-        })
+        // app.get('/contacts/update', async (request, response) =>{
+        //        // const COUNTER = await contactList.methods.count().call();
+        //         console.log('Called Contact update request for contactList so we can update..');
+        //         await contactList.methods.updateCount().send({from:'0x3aD966438610955c1f273a7BE4B43fcff1954433'});
+        //         console.log('updatedCount for contract');
+        // })
 
-        app.get('/contacts/getcount', async (request, response) =>{
-                console.log('Called Contact getCount  request for contactList so we can update..');
-                const COUNTER = await contactList.methods.getCount().call();
-                console.log('Checked count for contract');
-        })
+        // app.get('/contacts/getcount', async (request, response) =>{
+        //         console.log('Called Contact getCount  request for contactList so we can update..');
+        //         const COUNTER = await contactList.methods.getCount().call();
+        //         console.log('Checked count for contract');
+        // })
 
 
         app.get('/contacts', async (request, response) => {
@@ -55,6 +55,7 @@ if (typeof web3 !== 'undefined') {
 
                 console.log('In /contacts route request...');
                 let cache = [];
+                //const COUNTER = await contactList.methods.getCount().call();
                 const COUNTER = await contactList.methods.count().call();
                 console.log('Called Contact request for contactList ');
                 for (let i = 1; i <= COUNTER; i++) {
