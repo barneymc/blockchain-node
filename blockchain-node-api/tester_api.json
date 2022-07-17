@@ -33,7 +33,8 @@
             [
                 "a3a71bd3.e90858",
                 "f5868af8.e5dc18",
-                "c81cd5ad.d816a8"
+                "c81cd5ad.d816a8",
+                "a4d0526f.9ff32"
             ]
         ]
     },
@@ -78,11 +79,12 @@
         "id": "c81cd5ad.d816a8",
         "type": "http request",
         "z": "1c3f162c.7f936a",
+        "d": true,
         "name": "updateContact",
         "method": "GET",
         "ret": "obj",
         "paytoqs": "body",
-        "url": "localhost:3001/contacts/create",
+        "url": "localhost:3001/contacts/create?_name=G4&_phone=1234",
         "tls": "",
         "persist": false,
         "proxy": "",
@@ -177,5 +179,341 @@
                 "a3a71bd3.e90858"
             ]
         ]
+    },
+    {
+        "id": "a4d0526f.9ff32",
+        "type": "function",
+        "z": "1c3f162c.7f936a",
+        "name": "",
+        "func": "msg.url=\"localhost:3001/contacts/create?_name=Billy&_phone=Jean\";\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "x": 120,
+        "y": 300,
+        "wires": [
+            [
+                "245a8b43.ba0ec4"
+            ]
+        ]
+    },
+    {
+        "id": "245a8b43.ba0ec4",
+        "type": "http request",
+        "z": "1c3f162c.7f936a",
+        "name": "updateContact2",
+        "method": "GET",
+        "ret": "obj",
+        "paytoqs": "body",
+        "url": "",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "authType": "",
+        "x": 380,
+        "y": 300,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "84b0de04.5de7",
+        "type": "debug",
+        "z": "1c3f162c.7f936a",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 620,
+        "y": 300,
+        "wires": []
+    },
+    {
+        "id": "28056d5c.bed152",
+        "type": "mqtt in",
+        "z": "1c3f162c.7f936a",
+        "d": true,
+        "name": "colasSubConnection",
+        "topic": "bridge/colas",
+        "qos": "0",
+        "datatype": "auto",
+        "broker": "20806b7d.e589d4",
+        "x": 890,
+        "y": 200,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "795ed803.e91288",
+        "type": "debug",
+        "z": "1c3f162c.7f936a",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 690,
+        "y": 640,
+        "wires": []
+    },
+    {
+        "id": "1ea17036.36f64",
+        "type": "mqtt in",
+        "z": "1c3f162c.7f936a",
+        "d": true,
+        "name": "subColas",
+        "topic": "bridge/colas",
+        "qos": "0",
+        "datatype": "auto",
+        "broker": "564f9a0a.e39a94",
+        "x": 880,
+        "y": 280,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "95cca6c1.592a78",
+        "type": "debug",
+        "z": "1c3f162c.7f936a",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 880,
+        "y": 440,
+        "wires": []
+    },
+    {
+        "id": "bbd52664.5deb08",
+        "type": "mqtt out",
+        "z": "1c3f162c.7f936a",
+        "d": true,
+        "name": "pubColas",
+        "topic": "bridge/colas",
+        "qos": "0",
+        "retain": "",
+        "broker": "564f9a0a.e39a94",
+        "x": 900,
+        "y": 340,
+        "wires": []
+    },
+    {
+        "id": "db1f2bc3.f33f78",
+        "type": "mqtt out",
+        "z": "1c3f162c.7f936a",
+        "name": "mqttPubTKML",
+        "topic": "TKML/imageIn",
+        "qos": "0",
+        "retain": "",
+        "broker": "67d689b9.ddc078",
+        "x": 360,
+        "y": 620,
+        "wires": []
+    },
+    {
+        "id": "97c1d7c7.860838",
+        "type": "mqtt in",
+        "z": "1c3f162c.7f936a",
+        "name": "",
+        "topic": "TKML/imageIn",
+        "qos": "0",
+        "datatype": "auto",
+        "broker": "67d689b9.ddc078",
+        "x": 140,
+        "y": 560,
+        "wires": [
+            [
+                "330a29a8.9d3d96"
+            ]
+        ]
+    },
+    {
+        "id": "b99d2bbf.13cf58",
+        "type": "inject",
+        "z": "1c3f162c.7f936a",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{\"name\":\"Billyzz\",\"phone\":\"Jeanzz\"}",
+        "payloadType": "json",
+        "x": 150,
+        "y": 620,
+        "wires": [
+            [
+                "db1f2bc3.f33f78"
+            ]
+        ]
+    },
+    {
+        "id": "aecefea9.95953",
+        "type": "function",
+        "z": "1c3f162c.7f936a",
+        "name": "",
+        "func": "//takes the JSON object and converts it to Javascript object so we can use it in the QueryString...\nvar jsonObj = msg.payload;\nvar _name   = jsonObj.name;\nvar _phone  = jsonObj.phone;\n\nnode.warn(_name);\n\nmsg.url     = \"localhost:3001/contacts/create?_name=\"+ _name +  \"&_phone=\" + _phone;\nnode.warn(msg.url);\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "x": 560,
+        "y": 560,
+        "wires": [
+            [
+                "795ed803.e91288",
+                "245a8b43.ba0ec4"
+            ]
+        ]
+    },
+    {
+        "id": "330a29a8.9d3d96",
+        "type": "json",
+        "z": "1c3f162c.7f936a",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": false,
+        "x": 410,
+        "y": 560,
+        "wires": [
+            [
+                "aecefea9.95953"
+            ]
+        ]
+    },
+    {
+        "id": "20806b7d.e589d4",
+        "type": "mqtt-broker",
+        "z": "",
+        "name": "hiveMQBroker",
+        "broker": "14a9eb8e23da40eca2300f99c9178d9e.s1.eu.hivemq.cloud",
+        "port": "8883",
+        "tls": "db08d6c3.e5c038",
+        "clientid": "noredconn1",
+        "usetls": true,
+        "compatmode": false,
+        "keepalive": "60",
+        "cleansession": false,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": ""
+    },
+    {
+        "id": "564f9a0a.e39a94",
+        "type": "mqtt-broker",
+        "z": "",
+        "name": "AWSM4_Broker",
+        "broker": "a17xznyrtcvxwq-ats.iot.us-east-1.amazonaws.com",
+        "port": "8883",
+        "tls": "96174106.2e035",
+        "clientid": "cliTK1",
+        "usetls": true,
+        "compatmode": false,
+        "keepalive": "60",
+        "cleansession": false,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": ""
+    },
+    {
+        "id": "67d689b9.ddc078",
+        "type": "mqtt-broker",
+        "z": "6a8d898c.490048",
+        "name": "AWSM3_Broker",
+        "broker": "a17xznyrtcvxwq-ats.iot.us-east-1.amazonaws.com",
+        "port": "8883",
+        "tls": "f408b59d.4ae428",
+        "clientid": "pub1",
+        "usetls": true,
+        "compatmode": false,
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": ""
+    },
+    {
+        "id": "db08d6c3.e5c038",
+        "type": "tls-config",
+        "z": "",
+        "name": "hihveMQConn",
+        "cert": "",
+        "key": "",
+        "ca": "",
+        "certname": "",
+        "keyname": "",
+        "caname": "isrgrootx1.pem",
+        "servername": "",
+        "verifyservercert": false
+    },
+    {
+        "id": "96174106.2e035",
+        "type": "tls-config",
+        "z": "",
+        "name": "cfg2",
+        "cert": "",
+        "key": "",
+        "ca": "",
+        "certname": "68273a143c-certificate.pem (1).crt",
+        "keyname": "68273a143c-private.pem (1).key",
+        "caname": "rootca.pem",
+        "servername": "",
+        "verifyservercert": true
+    },
+    {
+        "id": "f408b59d.4ae428",
+        "type": "tls-config",
+        "z": "",
+        "name": "AWSM2_Config",
+        "cert": "",
+        "key": "",
+        "ca": "",
+        "certname": "68273a143c-certificate.pem (1).crt",
+        "keyname": "68273a143c-private.pem (1).key",
+        "caname": "rootca.pem",
+        "servername": "",
+        "verifyservercert": true
     }
 ]
