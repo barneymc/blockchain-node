@@ -55,10 +55,22 @@ if (typeof web3 !== 'undefined') {
                         await window.ethereum.enable();
                 }
                 console.log('Create with params');
-                console.log(request);
-                const stuff=await contactList.methods.createContact('GG1',' Murphy2').send({from:'0x3aD966438610955c1f273a7BE4B43fcff1954433',gasPrice: '0xFF', gasLimit: '0x24A22'});
-                console.log("Added Gerry");
-                response.json("Updated");
+                https://stackoverflow.com/a/9870540
+
+                console.log(request.query);   
+                const queryStringParams = request.query;                                                        //passed in QueryString of Request object (maybe try Body also?)
+                const qparamsParsed     = new URLSearchParams(queryStringParams);
+                const theNewName        = qparamsParsed.get("_name");
+                const theNewPhone       = qparamsParsed.get("_phone");
+                console.log("The name name is " + theNewName + '. The new phone is ' + theNewPhone);
+                
+
+                console.log(qparamsParsed);
+
+                //Calling update function on contract : https://besu.hyperledger.org/en/stable/Tutorials/Contracts/Calling-Contract-Functions/ 
+                const stuff=await contactList.methods.createContact(theNewName,theNewPhone).send({from:'0x3aD966438610955c1f273a7BE4B43fcff1954433',gasPrice: '0xFF', gasLimit: '0x24A22'});
+                console.log("Added " + theNewName);
+                response.json("Creation of new contract completed. " + theNewName);
                 
         })
 
