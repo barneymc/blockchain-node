@@ -19,7 +19,8 @@ async function main () {
 
   for (const path of args._) {
     const pathFiles = await getFilesFromPath(path)
-    files.push(...pathFiles)
+    files.push(...
+      pathFiles)
   }
 
   console.log(`Uploading ${files.length} files`)

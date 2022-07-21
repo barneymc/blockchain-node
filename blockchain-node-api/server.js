@@ -9,6 +9,24 @@ const artifacts = require('./build/contracts/Contacts.json');
 const CONTACT_ABI = require('./config');
 const CONTACT_ADDRESS = require('./config');
 
+//const ipfsClient = import('ipfs-http-client');                  //https://github.com/ipfs/js-ipfs/issues/4139
+//const j1=ipfsClient();
+
+//import { create } from 'ipfs-http-client';                              //doesnt work....cannot import outside module.
+
+//const ipfs = ipfsClient.Create('http://localhost:5001');
+
+//import ipfsClient from 'ipfs-http-client'
+//const ipfs1 = ipfsClient.create('localhost', '5001', { protocol: 'http' });
+
+//const ipfs = ipfsClient.Create('localhost', '5001', { protocol: 'http' })
+//
+
+//const { create } = require('ipfs-http-client')
+//const ipfsClient = create("https://ipfs.infura.io:5001/api/v0")
+
+
+
 app.use(cors());
 app.use(express.json());
 
@@ -31,6 +49,22 @@ if (typeof web3 !== 'undefined') {
 
         console.log('In here 3.0.0.0');
 
+
+        //******************* IPFS  ***************************** */
+        app.post('/upload', async (req, res) => {
+                const data = req.body;
+                console.log(data);
+                const fileHash = await addFile(data);
+                return res.send(`https://gateway.ipfs.io/ipfs/${ fileHash }`);
+            });
+            
+        const addFile = async ({ path, content }) => {
+        const file = { path: path, content: Buffer.from(content) };
+        const filesAdded = await ipfs.add(file);
+        return filesAdded[0].hash;
+        }
+
+            
 
         app.get('/', (req, res) => {
                 console.log('In root route request...');
