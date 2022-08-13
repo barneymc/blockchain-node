@@ -37,7 +37,13 @@ if (typeof web3 !== 'undefined') {
         var web3 = new Web3(new Web3.providers.HttpProvider('http://localhost:7545'));
         
         const accounts = web3.eth.getAccounts();
-        const contactList = new web3.eth.Contract(CONTACT_ABI.CONTACT_ABI, CONTACT_ADDRESS.CONTACT_ADDRESS);             
+
+        const contactList       = new web3.eth.Contract(CONTACT_ABI.CONTACT_ABI, CONTACT_ADDRESS.CONTACT_ADDRESS);        
+        const weighbridgeList   = new web3.eth.Contract(CONTACT_ABI.WEIGH_BRIDGE_ABI, CONTACT_ABI.WEIGH_BRIDGE_ADDRESS);
+        const bulkTankList      = new web3.eth.Contract(CONTACT_ABI.BULK_TANK_ABI, CONTACT_ABI.BULK_TANK_ADDRESS);
+
+        
+        
 
 
         console.log('In here 3.11' + accounts);
@@ -123,7 +129,7 @@ if (typeof web3 !== 'undefined') {
                                 })();
         })
 
-        app.get('/contacts/savetankweight',async(request, response) =>{
+        app.get('/contacts/savebulktankweight',async(request, response) =>{
                 if (typeof window !== "undefined") {
                         // browser code
                         await window.ethereum.enable();
@@ -141,12 +147,35 @@ if (typeof web3 !== 'undefined') {
                 console.log(qparamsParsed);
 
                 //Calling update function on contract : https://besu.hyperledger.org/en/stable/Tutorials/Contracts/Calling-Contract-Functions/ 
-                const stuff=await contactList.methods.saveWeight(theWeight).send({from:'0x29a9C3798Ab579CA7A6F24e2482b3f395F676f9a',gasPrice: '0xFF', gasLimit: '0x24A22'});
-                console.log("Added " + theWeight);
+                const stuff=await bulkTankList.methods.saveWeight(theWeight).send({from:'0x29a9C3798Ab579CA7A6F24e2482b3f395F676f9a',gasPrice: '0xFF', gasLimit: '0x24A22'});
+                console.log("Added BulkTank weight" + theWeight);
                 response.json("Creation of new contract completed. " + theWeight);
                 
         })
 
+        app.get('/contacts/saveweightbridgeweight',async(request, response) =>{
+                if (typeof window !== "undefined") {
+                        // browser code
+                        await window.ethereum.enable();
+                }
+                console.log('Create with params');
+                https://stackoverflow.com/a/9870540
+
+                console.log(request.query);   
+                const queryStringParams = request.query;                                                        //passed in QueryString of Request object (maybe try Body also?)
+                const qparamsParsed     = new URLSearchParams(queryStringParams);
+                const theWeight        = qparamsParsed.get("_weight");
+                console.log("The weight is " + theWeight);
+                
+
+                console.log(qparamsParsed);
+
+                //Calling update function on contract : https://besu.hyperledger.org/en/stable/Tutorials/Contracts/Calling-Contract-Functions/ 
+                const stuff=await weighbridgeList.methods.saveWeight(theWeight).send({from:'0x29a9C3798Ab579CA7A6F24e2482b3f395F676f9a',gasPrice: '0xFF', gasLimit: '0x24A22'});
+                console.log("Added " + theWeight);
+                response.json("Creation of new contract completed. " + theWeight);
+                
+        })
 
 
         app.get('/contacts/create',async(request, response) =>{
