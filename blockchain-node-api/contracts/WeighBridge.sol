@@ -2,7 +2,7 @@
 //pragma solidity >=0.4.22 <=0.8.15;
 pragma solidity >=0.4.22 <=0.8.15;
 
-contract WeighBridges {
+contract WeighBridge {
   uint      public count = 0; // state variable
   uint      public weight =0; //state variable
   string    public timestamp   ="";
