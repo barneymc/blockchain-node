@@ -8,6 +8,7 @@ const contract = require('@truffle/contract');
 const artifacts = require('./build/contracts/Contacts.json');
 const CONTACT_ABI = require('./config');
 const CONTACT_ADDRESS = require('./config');
+const { response } = require('express');
 
 //const ipfsClient = import('ipfs-http-client');                  //https://github.com/ipfs/js-ipfs/issues/4139
 //const j1=ipfsClient();
@@ -83,6 +84,71 @@ if (typeof web3 !== 'undefined') {
 
         })
 
+
+        app.get('/contacts/sendEmail', async(request, response) =>{
+
+                const SENDGRID_API_KEY='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';
+                const sgMail = require('@sendgrid/mail');
+                console.log('Sending email via API');
+                                sgMail.setApiKey(SENDGRID_API_KEY);
+                                const msg = {
+                                        to: 'jlallyboy@gmail.com',
+                                        from: 'brendan.mcardle@gmail.com', // Use the email address or domain you verified above
+                                        subject: 'Bulk Tank Level Low',
+                                        text: 'Order Request for Delivery of Refrigerant',
+                                        html: '<strong>and easy to do anywhere, even with Node.js</strong>',
+                                };
+                                //ES6
+                                sgMail
+                                .send(msg)
+                                .then(() => {}, error => {
+                                                console.error(error);
+
+                                                                if (error.response) {
+                                                                console.error(error.response.body)
+                                                                }
+                                                });
+                                //ES8
+                                (async () => {
+                                        try {
+                                                await sgMail.send(msg);
+                                        } catch (error) {
+                                                
+                                                        console.error(error);
+
+                                                if (error.response) {
+                                                        console.error(error.response.body)
+                                                }
+                                         }
+                                })();
+        })
+
+        app.get('/contacts/savetankweight',async(request, response) =>{
+                if (typeof window !== "undefined") {
+                        // browser code
+                        await window.ethereum.enable();
+                }
+                console.log('Create with params');
+                https://stackoverflow.com/a/9870540
+
+                console.log(request.query);   
+                const queryStringParams = request.query;                                                        //passed in QueryString of Request object (maybe try Body also?)
+                const qparamsParsed     = new URLSearchParams(queryStringParams);
+                const theWeight        = qparamsParsed.get("_weight");
+                console.log("The weight is " + theWeight);
+                
+
+                console.log(qparamsParsed);
+
+                //Calling update function on contract : https://besu.hyperledger.org/en/stable/Tutorials/Contracts/Calling-Contract-Functions/ 
+                const stuff=await contactList.methods.saveWeight(theWeight).send({from:'0x29a9C3798Ab579CA7A6F24e2482b3f395F676f9a',gasPrice: '0xFF', gasLimit: '0x24A22'});
+                console.log("Added " + theWeight);
+                response.json("Creation of new contract completed. " + theWeight);
+                
+        })
+
+
+
         app.get('/contacts/create',async(request, response) =>{
                 if (typeof window !== "undefined") {
                         // browser code
@@ -102,7 +168,7 @@ if (typeof web3 !== 'undefined') {
                 console.log(qparamsParsed);
 
                 //Calling update function on contract : https://besu.hyperledger.org/en/stable/Tutorials/Contracts/Calling-Contract-Functions/ 
-                const stuff=await contactList.methods.createContact(theNewName,theNewPhone).send({from:'0x3aD966438610955c1f273a7BE4B43fcff1954433',gasPrice: '0xFF', gasLimit: '0x24A22'});
+                const stuff=await contactList.methods.createContact(theNewName,theNewPhone).send({from:'0x29a9C3798Ab579CA7A6F24e2482b3f395F676f9a',gasPrice: '0xFF', gasLimit: '0x24A22'});
                 console.log("Added " + theNewName);
                 response.json("Creation of new contract completed. " + theNewName);
                 

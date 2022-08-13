@@ -1,9 +1,10 @@
 //pragma solidity ^0.8.10;
 //pragma solidity >=0.4.22 <=0.8.15;
-pragma solidity >=0.4.22 <=0.8.0;
+pragma solidity >=0.4.22 <=0.8.15;
 
 contract Contacts {
   uint public count = 0; // state variable
+  uint public weight =0; //state variable
 
   event MyEvent(address indexed from, string message);
 
@@ -28,5 +29,11 @@ contract Contacts {
     emit MyEvent(msg.sender, 'Just created a contract in createContract()');
     count++;
     contacts[count] = Contact(count, _name, _phone);
+  }
+
+  //Added ability to save Tank Weight
+  function saveWeight(uint recordedTankWeight) public {
+    emit MyEvent(msg.sender, 'Just recorded tank Weight in saveWeight()');
+    weight=recordedTankWeight;
   }
 }

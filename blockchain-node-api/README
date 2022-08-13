@@ -1,0 +1,27 @@
+This is the server code. You run it as follows : 
+C:\Users\barney\blockchain-node\blockchain-node-api> nodemon server.js
+
+Ensure Ganache is running using SERVER1 workspace.
+1. delete build/contracts
+2. truffle compile
+3. truffle migrate 
+
+Open a new browser with jallyboy and connect to the Server1 workspace. 
+Ensure you are connect with Metamask with an account from that new/existing workspace. 
+You may need to check connections in Metamask and maually connect. 
+Once connected try loading the localhost
+
+test by checking if you can connect to localhost:3001 as per the server.js settings. 
+  app.listen(process.env.PORT || 3001
+
+Then try and run a method from the routes in the settings.js file. 
+    /localhost/contacts/getcount failed first time. Error was it was out of gas. It was actually the ABI reference an old Contract address.
+
+4. Ensure the config.sys has the correct Contract address at the top of the file, otherwise you may get this out of gas error.
+5. Now it is adding new data using /contacts/create
+6. Fire up local instance of node-red (dev laptop home)
+7. You can see in the startup console that the node-red is connected to the AWS MQTT Broker : 
+        3 Aug 21:01:59 - [info] [mqtt-broker:AWSM3_Broker] Connected to broker: pub1@mqtts://a17xznyrtcvxwq-ats.iot.us-east-1.amazonaws.com:8883
+8. Check the node-red flow at : http://127.0.0.1:1880/#flow/1c3f162c.7f936a
+9. The link betweem the node-red and the blockchain is MQTT and then a URL call containing a QueryString built from the JSON parsed from the MQTT topic. There is no need for nodejs server to subscribe to MQTT, though you probably could do it that way too. This is built in the fnPushQueryString function (found in the NodeAPIServer http://127.0.0.1:1880/#flow/1c3f162c.7f936a)
+10. 
