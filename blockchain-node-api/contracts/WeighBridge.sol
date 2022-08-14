@@ -5,7 +5,9 @@ pragma solidity >=0.4.22 <=0.8.15;
 contract WeighBridge {
   uint      public count = 0; // state variable
   uint      public weight =0; //state variable
+  uint      public ID=0;      //helps us track the calls from data source
   string    public timestamp   ="";
+
 
   event MyEvent(address indexed from, string message);
 
@@ -16,15 +18,18 @@ contract WeighBridge {
   constructor() public {
     //createWeighBridge('WeightBridge COLAS', '123123123');
     emit MyEvent(msg.sender, 'Just created WeighBridge storage contract :');
-    count=0;
-    weight=0;
-    timestamp="now!";
+    count     = 0;
+    weight    = 0;
+    ID        = 0;
+    timestamp = "now!";
   }
 
 
   //Added ability to save Tank Weight
-  function saveWeight(uint recordedTankWeight) public {
+  function saveWeight(uint recordedTankWeight, string memory inputTimeStamp, uint inputID) public {
     emit MyEvent(msg.sender, 'Just recorded tank Weight in saveWeight()');
-    weight=recordedTankWeight;
+    weight    = recordedTankWeight;
+    timestamp = inputTimeStamp;
+    ID        = inputID;
   }
 }

@@ -24,4 +24,8 @@ Then try and run a method from the routes in the settings.js file.
         3 Aug 21:01:59 - [info] [mqtt-broker:AWSM3_Broker] Connected to broker: pub1@mqtts://a17xznyrtcvxwq-ats.iot.us-east-1.amazonaws.com:8883
 8. Check the node-red flow at : http://127.0.0.1:1880/#flow/1c3f162c.7f936a
 9. The link betweem the node-red and the blockchain is MQTT and then a URL call containing a QueryString built from the JSON parsed from the MQTT topic. There is no need for nodejs server to subscribe to MQTT, though you probably could do it that way too. This is built in the fnPushQueryString function (found in the NodeAPIServer http://127.0.0.1:1880/#flow/1c3f162c.7f936a)
-10. 
+10. The RaspberryPi Temp sensor is running on this flow : http://192.168.1.2:1880/#flow/4385f2bf.b8140c - this publishes the data that the AWS IoT Broker.
+11. The Subscriber is running on dev laptop at http://127.0.0.1:1880/#flow/1c3f162c.7f936a and fnPushWeightQueryString2 calls the URL (the node server)
+12. Make sure the node server is running on dev laptop : nodemon server.js
+13. If the Contracts are modified, they need to be recompiled and remigrated to Ganache and the ABI updated.
+13.1 CD into the/contracts directory. Run solcjs WeighBridge.sol --abi to regenerate the ABI. Cut&Paste the ABI into the config.js file. This is reference then in server.js 

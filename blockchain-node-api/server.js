@@ -153,7 +153,7 @@ if (typeof web3 !== 'undefined') {
                 
         })
 
-        app.get('/contacts/saveweightbridgeweight',async(request, response) =>{
+        app.get('/contacts/saveweighbridgeweight',async(request, response) =>{
                 if (typeof window !== "undefined") {
                         // browser code
                         await window.ethereum.enable();
@@ -164,14 +164,19 @@ if (typeof web3 !== 'undefined') {
                 console.log(request.query);   
                 const queryStringParams = request.query;                                                        //passed in QueryString of Request object (maybe try Body also?)
                 const qparamsParsed     = new URLSearchParams(queryStringParams);
+                
                 const theWeight        = qparamsParsed.get("_weight");
+                const thetimeStamp     = qparamsParsed.get("_timeStamp");
+                const theID            = qparamsParsed.get("_ID");
+
+
                 console.log("The weight is " + theWeight);
                 
 
                 console.log(qparamsParsed);
 
                 //Calling update function on contract : https://besu.hyperledger.org/en/stable/Tutorials/Contracts/Calling-Contract-Functions/ 
-                const stuff=await weighbridgeList.methods.saveWeight(theWeight).send({from:'0x29a9C3798Ab579CA7A6F24e2482b3f395F676f9a',gasPrice: '0xFF', gasLimit: '0x24A22'});
+                const stuff=await weighbridgeList.methods.saveWeight(theWeight,thetimeStamp, theID).send({from:'0x29a9C3798Ab579CA7A6F24e2482b3f395F676f9a',gasPrice: '0xFF', gasLimit: '0x24A22'});
                 console.log("Added " + theWeight);
                 response.json("Creation of new contract completed. " + theWeight);
                 
