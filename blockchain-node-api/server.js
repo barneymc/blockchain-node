@@ -93,7 +93,7 @@ if (typeof web3 !== 'undefined') {
 
         app.get('/contacts/sendEmail', async(request, response) =>{
 
-                const SENDGRID_API_KEY='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';
+                const SENDGRID_API_KEY='*****';
                 const sgMail = require('@sendgrid/mail');
                 console.log('Sending email via API');
                                 sgMail.setApiKey(SENDGRID_API_KEY);
