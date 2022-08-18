@@ -10,7 +10,7 @@ contract WeighBridge {
 
   event MyEvent(address indexed from, string message);
 
-
+// Added comment for WeighBridge
 
 
 
