@@ -2,6 +2,8 @@
 ### Modular Architecture for Refrigerant Traceability using Ethereum
 # blockchain-node
 
+Below is a brief description of the modules created. A more thorough description can be found in the paper itself.
+
 ![This is the Modular Architecture](https://github.com/barneymc/blockchain-node/blob/main/Node_Red_artifacts/ModularArchitecture.jpg)
 
 ## Module B
