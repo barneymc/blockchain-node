@@ -10,8 +10,10 @@ The Blockchain libraries are called as a result of an asnych call :  app.get('/c
 This node.js server [BC_NodeSever] sits on the same local dev machine running the Node-Red flow in Module B.
 Together these form the Module B - Application Integration layer. They facilitate data flowing from Module A to Module C( hosted Kaleido Blockchain).
 
+The Node-Red flow in Module B subscribes to AWS (and by doing so, picks up the messages emanating from Module A, the field device and the Siemsens PLC). 
+
 **Node-red**
-The fnPushWeightToServer and fnPushBulkTankWeightToServer build the necessary QueryString complete with the required parameters to make a call to the locally running BC_NodeServer.
+The fnPushWeightToServer and fnPushBulkTankWeightToServer build the necessary QueryString complete with the required parameters to make a call to the locally running BC_NodeServer. These are the core elements in Module A that collect the data and using MQTT publish it to AWS.
 
 
 **blockchain-node-api** 
