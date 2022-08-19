@@ -19,3 +19,5 @@ The *fnPushWeightToServer* and *fnPushBulkTankWeightToServer* build the necessar
 **blockchain-node-api** 
 This is the initial project which was concerned with getting the code to work with Ganache locally.
 Smart Contracts were written for Ganache first then deployed to production Kaleido (i.e. running in the cloud - in Module C).
+
+![This is the Modular Architecture](https://github.com/barneymc/blockchain-node/blob/main/Node_Red_artifacts/ModularArchitecture.jpg)
