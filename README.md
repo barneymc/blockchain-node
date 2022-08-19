@@ -32,3 +32,10 @@ This contains the node-red flows that publish the device and Siemens PLC
 Below is the circuit design for connecting the DS18B20 to the Raspberry Pi
 
 ![This is the RaspberryPi Circiut](https://github.com/barneymc/blockchain-node/blob/main/Node_Red_artifacts/RaspberryPi_Circuit.jpg)
+
+## Module C
+
+This contains the AWS IoT Core running in US-East1. It contains the MQTT broker that handles published messages from Module A.
+By routing these through AWS we allow for data analytics to be conducted in the future. 
+
+It also contains the **Blockchain-as-a-Service** Kaleido which is at the core of the results discussed in the paper. 
