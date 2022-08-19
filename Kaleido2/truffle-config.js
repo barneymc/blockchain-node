@@ -14,6 +14,7 @@ module.exports = {
         // appA on Fiddy2...n1 node. 
         //return new HTTPProviderRateLimitRetry(`https://e1up2fiq1o:b37On7ZiN_lSg6OiM8Zm0OA_3mr5sW0KrvB-MnuLe_o@e1z9s90rvr-e1mlq0f1l2-rpc.eu1-azure.kaleido.io/`, 100000);
         // appB on Fiddy2...n1 node...
+        //e1z8aa4ej3 is an AppCred ID for "appB" - https://console.kaleido.io/orgs/u0i9aclrhf/consortia/e1wt4bn8hq/environments/e1z9s90rvr/security/appcreds/e1z8aa4ej3?runtime_id=e1mlq0f1l2
         return new HTTPProviderRateLimitRetry('https://e1z8aa4ej3:xhZDCQxrxCf6jYLSyW88N_qAgZzidWeXAtcdTOlB6Sk@e1z9s90rvr-e1mlq0f1l2-rpc.eu1-azure.kaleido.io/', 100000);
       },
       network_id: "*", // Match any network id

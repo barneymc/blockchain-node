@@ -45,7 +45,7 @@ if (typeof web3 !== 'undefined') {
         const bulkTankList      = new web3.eth.Contract(CONTACT_ABI.BULK_TANK_ABI, CONTACT_ABI.BULK_TANK_ADDRESS);
         const simpleStorageList = new web3.eth.Contract(CONTACT_ABI.SIMPLE_STORAGE_ABI, CONTACT_ABI.SIMPLESTORAGE_ADDRESS);
 
-        const accountAddress    = '0xa009c2db641acea109a5e650e63b75c80c5e6e77';   //kaleido Fidd2 signing account - must be a string
+        const accountAddress    = '0xa009c2db641acea109a5e650e63b75c80c5e6e77';   //kaleido Fiddy2 signing account - must be a string
         
         
 
@@ -198,12 +198,16 @@ if (typeof web3 !== 'undefined') {
                 console.log('Create with params ' + request.query);
                 const queryStringParams = request.query;                                                        
                 const qparamsParsed     = new URLSearchParams(queryStringParams);
+
                 const theWeight         = qparamsParsed.get("_weight");
-                const doUpdate          = await bulkTankList.methods.saveWeight(theWeight).send({from:'0x29a9C3798Ab579CA7A6F24e2482b3f395F676f9a',gasPrice: '0xFF', gasLimit: '0x24A22'});
+                const thetimeStamp     =  qparamsParsed.get("_timeStamp");
+                const theID            =  qparamsParsed.get("_ID");
+                
+                const doUpdate          = await bulkTankList.methods.saveBulkTankWeight(theWeight,thetimeStamp, theID).send({from:'accountAddress',gasPrice: '0xFF', gasLimit: '0x24A22'});
                 console.log("Added BulkTank weight" + theWeight);
                 console.log("The weight is " + theWeight);
                 console.log(qparamsParsed);
-                response.json("Creation of new contract completed. " + theWeight);
+                response.json("Update of  Bulktank contract completed. " + theWeight);
                 
         })
 
@@ -219,9 +223,9 @@ if (typeof web3 !== 'undefined') {
                 const queryStringParams = request.query;                                                        //passed in QueryString of Request object (maybe try Body also?)
                 const qparamsParsed     = new URLSearchParams(queryStringParams);
                 
-                const theWeight        = 1;//qparamsParsed.get("_weight");
-                const thetimeStamp     = 2;//qparamsParsed.get("_timeStamp");
-                const theID            = 3;//qparamsParsed.get("_ID");
+                const theWeight        = qparamsParsed.get("_weight");
+                const thetimeStamp     = qparamsParsed.get("_timeStamp");
+                const theID            = qparamsParsed.get("_ID");
 
 
                 console.log("The weight is " + theWeight);
@@ -232,7 +236,7 @@ if (typeof web3 !== 'undefined') {
                 //Calling update function on contract : https://besu.hyperledger.org/en/stable/Tutorials/Contracts/Calling-Contract-Functions/ 
                 const stuff=await weighbridgeList.methods.saveWeight(theWeight,thetimeStamp, theID).send({from:accountAddress,gasPrice: '0xFF', gasLimit: '0x24A22'});
                 console.log("Added " + theWeight);
-                response.json("Creation of new contract completed. " + theWeight);
+                response.json("Update of  contract completed. " + theWeight);
                 
         })
 
