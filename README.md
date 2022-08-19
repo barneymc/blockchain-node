@@ -46,7 +46,7 @@ This runs on the local dev PC and is used to test the contracts before deploying
 
 To test the code properly requires an account on Kaleido and a network of nodes to contain the contracts. 
 
-##Smart COntract
+## Smart Contract
 
 This is an example of a smart contract defined on Ganache and deployed to production.
 
