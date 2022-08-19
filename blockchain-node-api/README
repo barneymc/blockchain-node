@@ -1,4 +1,9 @@
-This is the server code. You run it as follows : 
+This is the server code which sits in **Module B. **
+This branch is designed to migrate the contracts to locally running Ganache.
+Much of this code is similar to **Kaleido2** which is concerned with deploying to Production.
+
+
+You run it as follows : 
 C:\Users\barney\blockchain-node\blockchain-node-api> nodemon server.js
 
 Ensure Ganache is running using SERVER1 workspace.
