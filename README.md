@@ -53,3 +53,7 @@ This is an example of a smart contract defined on Ganache and deployed to produc
 ![Smart Contract](https://github.com/barneymc/blockchain-node/blob/main/Node_Red_artifacts/ContractExample.jpg)
 
 It was developed in Microsoft VSCode using the TruffleSuite Plugin. 
+
+## Results
+
+This folder contains the results file.
