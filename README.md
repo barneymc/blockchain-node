@@ -1,8 +1,10 @@
-## Module B
 
+### Modular Architecture for Refrigerant Traceability using Ethereum
 # blockchain-node
 
 ![This is the Modular Architecture](https://github.com/barneymc/blockchain-node/blob/main/Node_Red_artifacts/ModularArchitecture.jpg)
+
+## Module B
 
 **Kaleido2**
 contains the code necessary to connect to Kaleido hosted Blockchain. This code sits in Module B and runs on the dev laptop.
