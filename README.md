@@ -1,3 +1,5 @@
+## Module B
+
 # blockchain-node
 
 ![This is the Modular Architecture](https://github.com/barneymc/blockchain-node/blob/main/Node_Red_artifacts/ModularArchitecture.jpg)
@@ -22,4 +24,6 @@ The *fnPushWeightToServer* and *fnPushBulkTankWeightToServer* build the necessar
 This is the initial project which was concerned with getting the code to work with Ganache locally.
 Smart Contracts were written for Ganache first then deployed to production Kaleido (i.e. running in the cloud - in Module C).
 
+## Module A
 
+This contains the node-red flows that publish the device and Siemens PLC 
