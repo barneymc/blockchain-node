@@ -19,7 +19,7 @@ Together these form the Module B - Application Integration layer. They facilitat
 The Node-Red flow in Module B subscribes to AWS (and by doing so, picks up the messages emanating from Module A, the field device and the Siemsens PLC). 
 
 **Node-red**
-The *fnPushWeightToServer* and *fnPushBulkTankWeightToServer* build the necessary QueryString complete with the required parameters to make a call to the locally running BC_NodeServer. These are the core elements in Module C that collect the data and using MQTT publish it to AWS.
+The *fnPushWeightToServer* and *fnPushBulkTankWeightToServer* build the necessary QueryString complete with the required parameters to make a call to the locally running BC_NodeServer. 
 
 
 **blockchain-node-api** 
@@ -28,7 +28,7 @@ Smart Contracts were written for Ganache first then deployed to production Kalei
 
 ## Module A
 
-This contains the node-red flows that publish the device and Siemens PLC 
+This contains the node-red flows that publish the device and Siemens PLC data to AWS.
 Below is the circuit design for connecting the DS18B20 to the Raspberry Pi
 
 ![This is the RaspberryPi Circiut](https://github.com/barneymc/blockchain-node/blob/main/Node_Red_artifacts/RaspberryPi_Circuit.jpg)
