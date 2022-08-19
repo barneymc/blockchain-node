@@ -8,7 +8,7 @@
 
 **Kaleido2**
 contains the code necessary to connect to Kaleido hosted Blockchain. This code sits in Module B and runs on the dev laptop.
-It is a node.js application and runs under nodemon server.js
+It is a node.js application and runs under *nodemon server.js*
 
 The Blockchain libraries are called as a result of an asnych call :  *app.get('/contacts/savebulktankweight',async(request, response)*  - the routing is inside the node.js server.
 
