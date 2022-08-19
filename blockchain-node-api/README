@@ -1,4 +1,4 @@
-This is the server code which sits in **Module B. **
+This is the server code which sits in **Module B**
 This branch is designed to migrate the contracts to locally running Ganache.
 Much of this code is similar to **Kaleido2** which is concerned with deploying to Production.
 
