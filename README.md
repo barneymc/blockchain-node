@@ -39,3 +39,7 @@ This contains the AWS IoT Core running in US-East1. It contains the MQTT broker 
 By routing these through AWS we allow for data analytics to be conducted in the future. 
 
 It also contains the **Blockchain-as-a-Service** Kaleido which is at the core of the results discussed in the paper. 
+
+## Ganache 
+
+This runs on the local dev PC and is used to test the contracts before deploying the production (Kaleido in Module C). The contracts are identical.
