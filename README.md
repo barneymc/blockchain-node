@@ -19,11 +19,11 @@ Together these form the Module B - Application Integration layer. They facilitat
 The Node-Red flow in Module B subscribes to AWS (and by doing so, picks up the messages emanating from Module A, the field device and the Siemsens PLC). 
 
 **Node-red**
-The *fnPushWeightToServer* and *fnPushBulkTankWeightToServer* build the necessary QueryString complete with the required parameters to make a call to the locally running BC_NodeServer. These are the core elements in Module A that collect the data and using MQTT publish it to AWS.
+The *fnPushWeightToServer* and *fnPushBulkTankWeightToServer* build the necessary QueryString complete with the required parameters to make a call to the locally running BC_NodeServer. These are the core elements in Module C that collect the data and using MQTT publish it to AWS.
 
 
 **blockchain-node-api** 
-This is the initial project which was concerned with getting the code to work with Ganache locally.
+This is a separate branch for the project which was concerned with getting the code to work with Ganache locally.
 Smart Contracts were written for Ganache first then deployed to production Kaleido (i.e. running in the cloud - in Module C).
 
 ## Module A
