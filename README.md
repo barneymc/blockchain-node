@@ -43,3 +43,5 @@ It also contains the **Blockchain-as-a-Service** Kaleido which is at the core of
 ## Ganache 
 
 This runs on the local dev PC and is used to test the contracts before deploying the production (Kaleido in Module C). The contracts are identical.
+
+To test the code properly requires an account on Kaleido and a network of nodes to contain the contracts. 
