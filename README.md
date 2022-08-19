@@ -29,3 +29,6 @@ Smart Contracts were written for Ganache first then deployed to production Kalei
 ## Module A
 
 This contains the node-red flows that publish the device and Siemens PLC 
+Below is the circuit design for connecting the DS18B20 to the Raspberry Pi
+
+![This is the RaspberryPi Circiut](https://github.com/barneymc/blockchain-node/blob/main/Node_Red_artifacts/RaspberryPi_Circuit.jpg)
