@@ -1,0 +1,557 @@
+[
+    {
+        "id": "4385f2bf.b8140c",
+        "type": "tab",
+        "label": "Raspberry Pi - Temp Sensor",
+        "disabled": false,
+        "info": "# Toturial Detals\n\n2. Check the IP of the RaspBerry Pi using the router UI : http://192.168.1.1/. PLug the Pi into the Vodafone (Huewai) router. No need to have it plugged directly into the laptop.\n3. \n2. Use Putty and pi+password to open an SSH session - in this case the IP address is 192.168.1.12.\n_3. Don't use ipconfig it won't show up._\n3. Follow this tutorial to add the configuration required for the GPIO : http://www.circuitbasics.com/raspberry-pi-ds18b20-temperature-sensor-tutorial/ and\n4. here is the YouTube accompanying it : https://www.youtube.com/watch?v=aEnS0-Jy2vE. This shows how to physically wire up the breadboard\n5. with the DS18B20 Temp sensor.\n\n1. You can start Node-Red on the RaspBerry pi \"node-red\" and connect using the **remote IP address** that you got from Step #1\n2. This will be 192.168.1.12:1880. From here you can easily install the node that allows you read the temp from the sensor.\n3. Node library : https://flows.nodered.org/node/node-red-contrib-ds18b20-sensor\n4. \nNote that the data from the sensor is saved to a file that is explained in the youtube clip (about 5:00 mins into video) so you can\neasily see the data logged to see if it is working.\n\nThen just connect your node to a MQTT node and push to CloudMQTT every 10 seconds.\nOpen your MQTTfx client and see the data flowing into the topics. \n\nOn the video he explains how to write the Python script to read this file and share it....there is no need for this if we just\ninstall the Node-Red nodes that handle all this crap for us....\n\n**# Dashboard**\n\nhttp://192.168.1.12:1880/ui\n\nAdd the dashboard node and join the output from the sensor node, and place it as input to the Dashboard node.\nConfigure look of chart. \n\n\n*** Run in the background ***\nIf you connect using Putty, start a node-red process and exit Putty - it will kill the associated node-red. We want to kick off the\nnode-red process and then close the terminal window, and have node-red still running away in the background.\n\n**nohup** node-red  -nosplash < /dev/null > /dev/null &\n\nSee https://www.ibm.com/support/knowledgecenter/SST55W_4.1.0/liaca/liacanohupcmd.html for reference.\n\n# \n# AWS IoT\nhttps://www.youtube.com/watch?v=TrEtf0R5nzE&feature=youtu.be this video shows how to create the certificates in AWS, import them into\nnode-red MQTT node and connect to AWS ioT.\n\nThe temp data is published every second (similar to CloudMQTT) and we can verify this by clicking on AWS -> Iot -> Test.\nWe subscribe to the topic \"awsRoomTemp\" which we defined in the node properties for the (node) broker. \n\nWe could add a Function node to add more details to the msg that is pushed to the broker....see the video.\n\nAWS AccountDetails are 141719517320/IAM User / Administrator => password\nWill need the Authenticator App then to add the MFA code also...\n\n"
+    },
+    {
+        "id": "44e8be98.8a20c",
+        "type": "mqtt out",
+        "z": "4385f2bf.b8140c",
+        "name": "",
+        "topic": "readers/evaprfid",
+        "qos": "",
+        "retain": "",
+        "broker": "144bda6b.23bd16",
+        "x": 460,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "73b714f3.c3782c",
+        "type": "inject",
+        "z": "4385f2bf.b8140c",
+        "name": "",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 240,
+        "y": 220,
+        "wires": [
+            [
+                "44e8be98.8a20c"
+            ]
+        ]
+    },
+    {
+        "id": "20f65c77.220614",
+        "type": "rpi-gpio out",
+        "z": "4385f2bf.b8140c",
+        "name": "",
+        "pin": "17",
+        "set": "",
+        "level": "0",
+        "freq": "",
+        "out": "out",
+        "bcm": true,
+        "x": 400,
+        "y": 360,
+        "wires": []
+    },
+    {
+        "id": "82d2cc6c.7f0a6",
+        "type": "inject",
+        "z": "4385f2bf.b8140c",
+        "name": "one",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "1",
+        "payloadType": "num",
+        "x": 150,
+        "y": 360,
+        "wires": [
+            [
+                "20f65c77.220614"
+            ]
+        ]
+    },
+    {
+        "id": "bddda71c.c77868",
+        "type": "inject",
+        "z": "4385f2bf.b8140c",
+        "name": "zero",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "0",
+        "payloadType": "num",
+        "x": 130,
+        "y": 440,
+        "wires": [
+            [
+                "20f65c77.220614"
+            ]
+        ]
+    },
+    {
+        "id": "cc0af08.5fe291",
+        "type": "rpi-ds18b20",
+        "z": "4385f2bf.b8140c",
+        "topic": "awsRoomTemp",
+        "array": false,
+        "name": "dsTempSensor",
+        "x": 460,
+        "y": 580,
+        "wires": [
+            [
+                "14b05f51.f81681",
+                "e9eda34.ab7176",
+                "7b8c0ce3.1f9e84",
+                "6bc13496.d7809c"
+            ]
+        ]
+    },
+    {
+        "id": "c705e8f3.1ea818",
+        "type": "inject",
+        "z": "4385f2bf.b8140c",
+        "name": "",
+        "props": [
+            {
+                "p": "payload",
+                "v": "",
+                "vt": "date"
+            },
+            {
+                "p": "topic",
+                "v": "",
+                "vt": "str"
+            }
+        ],
+        "repeat": "60",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 170,
+        "y": 580,
+        "wires": [
+            [
+                "cc0af08.5fe291"
+            ]
+        ]
+    },
+    {
+        "id": "14b05f51.f81681",
+        "type": "debug",
+        "z": "4385f2bf.b8140c",
+        "name": "debugStuff",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 810,
+        "y": 380,
+        "wires": []
+    },
+    {
+        "id": "e9eda34.ab7176",
+        "type": "ui_chart",
+        "z": "4385f2bf.b8140c",
+        "name": "",
+        "group": "d61e4bda.844368",
+        "order": 0,
+        "width": "9",
+        "height": "10",
+        "label": "TV Room Remp",
+        "chartType": "line",
+        "legend": "true",
+        "xformat": "HH:mm:ss",
+        "interpolate": "bezier",
+        "nodata": "Blank screen",
+        "dot": false,
+        "ymin": "12",
+        "ymax": "21",
+        "removeOlder": "48",
+        "removeOlderPoints": "",
+        "removeOlderUnit": "3600",
+        "cutout": 0,
+        "useOneColor": false,
+        "colors": [
+            "#1f77b4",
+            "#0080ff",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "useOldStyle": false,
+        "outputs": 1,
+        "x": 760,
+        "y": 600,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "7b8c0ce3.1f9e84",
+        "type": "mqtt out",
+        "z": "4385f2bf.b8140c",
+        "name": "",
+        "topic": "awsRoomTemp",
+        "qos": "",
+        "retain": "",
+        "broker": "144bda6b.23bd16",
+        "x": 800,
+        "y": 440,
+        "wires": []
+    },
+    {
+        "id": "b4d98b8a.d850d8",
+        "type": "debug",
+        "z": "4385f2bf.b8140c",
+        "name": "tgDebug",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "x": 1040,
+        "y": 80,
+        "wires": []
+    },
+    {
+        "id": "6bc13496.d7809c",
+        "type": "mqtt out",
+        "z": "4385f2bf.b8140c",
+        "name": "",
+        "topic": "channels/1003107/publish/fields/field1/Z7TWBR6GM0OI9JW2",
+        "qos": "0",
+        "retain": "",
+        "broker": "c0a81d54.8460f",
+        "x": 910,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "7fdb0ca9.9912f4",
+        "type": "inject",
+        "z": "4385f2bf.b8140c",
+        "name": "",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "13.7",
+        "payloadType": "num",
+        "x": 570,
+        "y": 200,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "88c52671513ee25e",
+        "type": "mqtt in",
+        "z": "4385f2bf.b8140c",
+        "name": "awsRead",
+        "topic": "awsRoomTemp",
+        "qos": "0",
+        "datatype": "auto",
+        "broker": "144bda6b.23bd16",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 250,
+        "y": 80,
+        "wires": [
+            [
+                "9c1747fbd3b546f3"
+            ]
+        ]
+    },
+    {
+        "id": "9c1747fbd3b546f3",
+        "type": "debug",
+        "z": "4385f2bf.b8140c",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 440,
+        "y": 80,
+        "wires": []
+    },
+    {
+        "id": "7639c225aff419b4",
+        "type": "rpi-ds18b20",
+        "z": "4385f2bf.b8140c",
+        "topic": "",
+        "array": false,
+        "name": "dev_DS18B20",
+        "x": 490,
+        "y": 700,
+        "wires": [
+            [
+                "ff60346603784d0c"
+            ]
+        ]
+    },
+    {
+        "id": "6d24bce627ace01e",
+        "type": "inject",
+        "z": "4385f2bf.b8140c",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "10",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payloadType": "date",
+        "x": 290,
+        "y": 700,
+        "wires": [
+            [
+                "7639c225aff419b4"
+            ]
+        ]
+    },
+    {
+        "id": "e1bdec2fbe3078d3",
+        "type": "mqtt out",
+        "z": "4385f2bf.b8140c",
+        "name": "aws_roomTemp",
+        "topic": "Brendan/Temp_OpenTest",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "c5dc3f8f83c10645",
+        "x": 1060,
+        "y": 700,
+        "wires": []
+    },
+    {
+        "id": "2175759033a5c94b",
+        "type": "mqtt in",
+        "z": "4385f2bf.b8140c",
+        "name": "",
+        "topic": "Brendan/Temp_OpenTest",
+        "qos": "0",
+        "datatype": "auto",
+        "broker": "c5dc3f8f83c10645",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 890,
+        "y": 560,
+        "wires": [
+            [
+                "83b5c44a59ed19a5"
+            ]
+        ]
+    },
+    {
+        "id": "83b5c44a59ed19a5",
+        "type": "debug",
+        "z": "4385f2bf.b8140c",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1110,
+        "y": 560,
+        "wires": []
+    },
+    {
+        "id": "b4837042022c1ee7",
+        "type": "function",
+        "z": "4385f2bf.b8140c",
+        "name": "fnBuildJSON",
+        "func": "var objTank={};\n//node.warn('Room temp from Raspberry Pi ');\nconst currentDate=new Date();\nobjTank={\n  \"weight\":Math.floor(msg.payload),\n  \"timeStamp\":currentDate,\n  \"count\":msg.count\n};\n\nmsg.payload=objTank;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 870,
+        "y": 700,
+        "wires": [
+            [
+                "e1bdec2fbe3078d3"
+            ]
+        ]
+    },
+    {
+        "id": "ff60346603784d0c",
+        "type": "counter",
+        "z": "4385f2bf.b8140c",
+        "name": "",
+        "init": "0",
+        "step": "1",
+        "lower": null,
+        "upper": null,
+        "mode": "increment",
+        "outputs": "1",
+        "x": 690,
+        "y": 700,
+        "wires": [
+            [
+                "b4837042022c1ee7"
+            ]
+        ]
+    },
+    {
+        "id": "144bda6b.23bd16",
+        "type": "mqtt-broker",
+        "name": "AWS_IOT_BROKER",
+        "broker": "a17xznyrtcvxwq-ats.iot.us-east-1.amazonaws.com",
+        "port": "8883",
+        "tls": "6a48408e.06d2c",
+        "clientid": "awsRoomTempClientDevice",
+        "autoConnect": true,
+        "usetls": true,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "willMsg": {},
+        "sessionExpiry": ""
+    },
+    {
+        "id": "d61e4bda.844368",
+        "type": "ui_group",
+        "name": "Home Auto",
+        "tab": "153f31e6.0aa67e",
+        "disp": true,
+        "width": "14",
+        "collapse": true
+    },
+    {
+        "id": "c0a81d54.8460f",
+        "type": "mqtt-broker",
+        "name": "ThingSpeak",
+        "broker": "mqtt.thingspeak.com",
+        "port": "1883",
+        "clientid": "",
+        "usetls": false,
+        "compatmode": true,
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": ""
+    },
+    {
+        "id": "c5dc3f8f83c10645",
+        "type": "mqtt-broker",
+        "name": "AWS_US_Broker",
+        "broker": "a17xznyrtcvxwq-ats.iot.us-east-1.amazonaws.com",
+        "port": "8883",
+        "tls": "e1431570de872d15",
+        "clientid": "raspPiTempDevice",
+        "autoConnect": true,
+        "usetls": true,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "willMsg": {},
+        "sessionExpiry": ""
+    },
+    {
+        "id": "6a48408e.06d2c",
+        "type": "tls-config",
+        "name": "awsCertificates",
+        "cert": "",
+        "key": "",
+        "ca": "",
+        "certname": "43bb3d1cf6-certificate.pem.crt",
+        "keyname": "43bb3d1cf6-private.pem.key",
+        "caname": "AmazonRootCA1.pem",
+        "servername": "",
+        "verifyservercert": true
+    },
+    {
+        "id": "153f31e6.0aa67e",
+        "type": "ui_tab",
+        "name": "Home",
+        "icon": "dashboard",
+        "disabled": false,
+        "hidden": false
+    },
+    {
+        "id": "e1431570de872d15",
+        "type": "tls-config",
+        "name": "awsUSCerts",
+        "cert": "",
+        "key": "",
+        "ca": "",
+        "certname": "68273a143c-certificate.pem (1).crt",
+        "keyname": "68273a143c-private.pem (1).key",
+        "caname": "rootca.pem",
+        "servername": "",
+        "verifyservercert": true,
+        "alpnprotocol": ""
+    }
+]

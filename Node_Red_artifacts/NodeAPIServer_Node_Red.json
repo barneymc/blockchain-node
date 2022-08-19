@@ -1,0 +1,1180 @@
+[
+    {
+        "id": "236e5396b4f9e2cf",
+        "type": "tab",
+        "label": "NodeAPI Server",
+        "disabled": false,
+        "info": "Added the msgSend to allow cloning of messages in order to stress test the server\r\nWe can set this to 0/1 to ensure no messages are cloned in normal running. \r\n\r\n**NodeJS server**\r\nIf the node.js server is not running on the same machine as this node-red flow then you will\r\nget an error with the URL"
+    },
+    {
+        "id": "90781b1401b362b9",
+        "type": "inject",
+        "z": "236e5396b4f9e2cf",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{\"val1\":\"G1\",\"val2\":\"G2\"}",
+        "payloadType": "json",
+        "x": 120,
+        "y": 120,
+        "wires": [
+            [
+                "1bbbb7ff46ca87a8",
+                "d292c36d79e56690",
+                "460976111842be12",
+                "44192f2fdea62bf0"
+            ]
+        ]
+    },
+    {
+        "id": "1bbbb7ff46ca87a8",
+        "type": "http request",
+        "z": "236e5396b4f9e2cf",
+        "name": "getContacts",
+        "method": "GET",
+        "ret": "obj",
+        "paytoqs": "ignore",
+        "url": "localhost:3001/contacts",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "authType": "",
+        "x": 370,
+        "y": 200,
+        "wires": [
+            [
+                "277ff9380560693a"
+            ]
+        ]
+    },
+    {
+        "id": "277ff9380560693a",
+        "type": "debug",
+        "z": "236e5396b4f9e2cf",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 600,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "460976111842be12",
+        "type": "http request",
+        "z": "236e5396b4f9e2cf",
+        "d": true,
+        "name": "updateContact",
+        "method": "GET",
+        "ret": "obj",
+        "paytoqs": "body",
+        "url": "localhost:3001/contacts/create?_name=G4&_phone=1234",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "authType": "",
+        "x": 380,
+        "y": 260,
+        "wires": [
+            [
+                "018ab63b42e73fc9"
+            ]
+        ]
+    },
+    {
+        "id": "018ab63b42e73fc9",
+        "type": "debug",
+        "z": "236e5396b4f9e2cf",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 600,
+        "y": 260,
+        "wires": []
+    },
+    {
+        "id": "d292c36d79e56690",
+        "type": "http request",
+        "z": "236e5396b4f9e2cf",
+        "name": "getCount",
+        "method": "GET",
+        "ret": "obj",
+        "paytoqs": "ignore",
+        "url": "localhost:3001/contacts/getcount",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "authType": "",
+        "x": 390,
+        "y": 360,
+        "wires": [
+            [
+                "90c0d3b91a617425"
+            ]
+        ]
+    },
+    {
+        "id": "90c0d3b91a617425",
+        "type": "debug",
+        "z": "236e5396b4f9e2cf",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 620,
+        "y": 360,
+        "wires": []
+    },
+    {
+        "id": "8800946baeb65eb8",
+        "type": "inject",
+        "z": "236e5396b4f9e2cf",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 130,
+        "y": 420,
+        "wires": [
+            [
+                "d292c36d79e56690",
+                "1bbbb7ff46ca87a8"
+            ]
+        ]
+    },
+    {
+        "id": "44192f2fdea62bf0",
+        "type": "function",
+        "z": "236e5396b4f9e2cf",
+        "name": "",
+        "func": "msg.url=\"localhost:3001/contacts/create?_name=Billy&_phone=Jean\";\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "x": 120,
+        "y": 300,
+        "wires": [
+            [
+                "cd6dcfbbdfbb09de"
+            ]
+        ]
+    },
+    {
+        "id": "cd6dcfbbdfbb09de",
+        "type": "http request",
+        "z": "236e5396b4f9e2cf",
+        "name": "updateContact2",
+        "method": "GET",
+        "ret": "obj",
+        "paytoqs": "body",
+        "url": "",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "authType": "",
+        "x": 380,
+        "y": 300,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "cc514019227f7436",
+        "type": "debug",
+        "z": "236e5396b4f9e2cf",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 620,
+        "y": 300,
+        "wires": []
+    },
+    {
+        "id": "21779f88d78ac965",
+        "type": "mqtt in",
+        "z": "236e5396b4f9e2cf",
+        "d": true,
+        "name": "colasSubConnection",
+        "topic": "bridge/colas",
+        "qos": "0",
+        "datatype": "auto",
+        "broker": "20806b7d.e589d4",
+        "inputs": 0,
+        "x": 890,
+        "y": 200,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "1d1d0919b1335f4b",
+        "type": "debug",
+        "z": "236e5396b4f9e2cf",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 950,
+        "y": 560,
+        "wires": []
+    },
+    {
+        "id": "e6d02cf0b338ae5b",
+        "type": "mqtt in",
+        "z": "236e5396b4f9e2cf",
+        "d": true,
+        "name": "subColas",
+        "topic": "bridge/colas",
+        "qos": "0",
+        "datatype": "auto",
+        "broker": "f1cc2e7707467a52",
+        "inputs": 0,
+        "x": 880,
+        "y": 280,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "2967c72d9c7756d3",
+        "type": "debug",
+        "z": "236e5396b4f9e2cf",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 880,
+        "y": 440,
+        "wires": []
+    },
+    {
+        "id": "b45c3e3e83064cc9",
+        "type": "mqtt out",
+        "z": "236e5396b4f9e2cf",
+        "d": true,
+        "name": "pubColas",
+        "topic": "bridge/colas",
+        "qos": "0",
+        "retain": "",
+        "broker": "f1cc2e7707467a52",
+        "x": 900,
+        "y": 340,
+        "wires": []
+    },
+    {
+        "id": "340296754c92997d",
+        "type": "mqtt out",
+        "z": "236e5396b4f9e2cf",
+        "name": "mqttPubTKML",
+        "topic": "TKML/imageIn",
+        "qos": "0",
+        "retain": "",
+        "broker": "402602645b5cf7de",
+        "x": 360,
+        "y": 620,
+        "wires": []
+    },
+    {
+        "id": "4ee087a6f7f1be59",
+        "type": "mqtt in",
+        "z": "236e5396b4f9e2cf",
+        "name": "",
+        "topic": "TKML/imageIn",
+        "qos": "0",
+        "datatype": "auto",
+        "broker": "402602645b5cf7de",
+        "inputs": 0,
+        "x": 140,
+        "y": 560,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "84a7564669c00974",
+        "type": "inject",
+        "z": "236e5396b4f9e2cf",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{\"name\":\"Billy44\",\"phone\":\"Jeanzz\"}",
+        "payloadType": "json",
+        "x": 150,
+        "y": 620,
+        "wires": [
+            [
+                "340296754c92997d"
+            ]
+        ]
+    },
+    {
+        "id": "b4c30354e287d1df",
+        "type": "function",
+        "z": "236e5396b4f9e2cf",
+        "name": "fnPushQueryString",
+        "func": "//takes the JSON object and converts it to Javascript object so we can use it in the QueryString...\n//var jsonObj = msg.payload;\nnode.warn('What is payload');\nnode.warn(msg);\n//node.warn(jsonObj);\n\nnode.warn('Tank Weight is : ' + msg.tank.tankWeight);\nvar _name=msg.tank.tankWeight;\nvar _phone=msg.tank.timeStamp;\n//var _name   = jsonObj.name;\n//var _phone  = jsonObj.phone;\n\nnode.warn(_name);\n\nmsg.url     = \"localhost:3001/contacts/create?_name=\"+ _name +  \"&_phone=\" + _phone;\nnode.warn(msg.url);\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "x": 750,
+        "y": 560,
+        "wires": [
+            [
+                "1d1d0919b1335f4b",
+                "cd6dcfbbdfbb09de"
+            ]
+        ]
+    },
+    {
+        "id": "4f79b7c0979f68a4",
+        "type": "json",
+        "z": "236e5396b4f9e2cf",
+        "name": "",
+        "property": "payload.objPass",
+        "action": "obj",
+        "pretty": false,
+        "x": 550,
+        "y": 560,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "05b2bdcaa7eba700",
+        "type": "mqtt in",
+        "z": "236e5396b4f9e2cf",
+        "name": "",
+        "topic": "Brendan/Tank_OpenTest",
+        "qos": "0",
+        "datatype": "auto",
+        "broker": "f1cc2e7707467a52",
+        "inputs": 0,
+        "x": 180,
+        "y": 500,
+        "wires": [
+            [
+                "3a9949973492c88c",
+                "2906ba868206b978"
+            ]
+        ]
+    },
+    {
+        "id": "3a9949973492c88c",
+        "type": "debug",
+        "z": "236e5396b4f9e2cf",
+        "name": "dbgTankValue",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 420,
+        "y": 460,
+        "wires": []
+    },
+    {
+        "id": "940af22d0f91576c",
+        "type": "mqtt out",
+        "z": "236e5396b4f9e2cf",
+        "name": "",
+        "topic": "Brendan/Tank_OpenTest",
+        "qos": "0",
+        "retain": "",
+        "broker": "f1cc2e7707467a52",
+        "x": 420,
+        "y": 700,
+        "wires": []
+    },
+    {
+        "id": "e99172ffc0bcb8ac",
+        "type": "inject",
+        "z": "236e5396b4f9e2cf",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "[[17,bla,23:30",
+        "payloadType": "str",
+        "x": 140,
+        "y": 700,
+        "wires": [
+            [
+                "940af22d0f91576c"
+            ]
+        ]
+    },
+    {
+        "id": "2906ba868206b978",
+        "type": "function",
+        "z": "236e5396b4f9e2cf",
+        "name": "",
+        "func": "var objPass={};\nvar arr=msg.payload.split(\",\");\n//objPass.timeStamp=arr[2];\n\n\n//Javascript Object literal\n\nvar objCar = {\n            type:\"Fiat\", \n            model:\"500\", \n            color:\"white\"\n            };\n\n\n//node.warn('timeStamp = ' + objPass.timeStamp);\nvar arrVal=arr[0].split(\"[[\");\n\n//Adding elemnt to an existing object\n//https://stackoverflow.com/a/736599/379804\n\n//objPass.tankWeight=arrVal[1];\n//node.warn('weight = ' +  objPass.tankWeight);\n\n//msg.payload.objPass=objPass;\n//msg.payload[\"car\"]=objCar;\n\nvar objTank={\n    tankWeight:arrVal[1],\n    timeStamp:arr[2]\n};\n\n\n\nmsg[\"tank\"]=objTank;\n\nnode.warn(msg);\n\n//msg.payload=arrVal[1];\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "x": 380,
+        "y": 560,
+        "wires": [
+            [
+                "7016570e5bef5974",
+                "dba5ff9a8cdc2cd0"
+            ]
+        ]
+    },
+    {
+        "id": "7016570e5bef5974",
+        "type": "debug",
+        "z": "236e5396b4f9e2cf",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 550,
+        "y": 500,
+        "wires": []
+    },
+    {
+        "id": "dba5ff9a8cdc2cd0",
+        "type": "function",
+        "z": "236e5396b4f9e2cf",
+        "name": "fnPushWeightQueryString",
+        "func": "//takes the JSON object and converts it to Javascript object so we can use it in the QueryString...\n//var jsonObj = msg.payload;\nnode.warn('What is payload');\nnode.warn(msg);\n\n\nnode.warn('Tank Weight is : ' + msg.tank.tankWeight);\n\nvar _weight=msg.tank.tankWeight;\nnode.warn(_weight);\n\nmsg.url     = \"localhost:3001/contacts/savetankweight?_weight=\"+ _weight;\nnode.warn(msg.url);\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "x": 770,
+        "y": 620,
+        "wires": [
+            [
+                "c7d3f4f1d8988a74"
+            ]
+        ]
+    },
+    {
+        "id": "c7d3f4f1d8988a74",
+        "type": "http request",
+        "z": "236e5396b4f9e2cf",
+        "name": "httpSaveWeight",
+        "method": "GET",
+        "ret": "obj",
+        "paytoqs": "body",
+        "url": "",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "authType": "",
+        "x": 1000,
+        "y": 620,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "8eebacd842f7114d",
+        "type": "function",
+        "z": "236e5396b4f9e2cf",
+        "name": "fnSendEmail",
+        "func": "msg.url     = \"localhost:3001/contacts/sendEmail\";\nnode.warn(msg.url);\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "x": 690,
+        "y": 760,
+        "wires": [
+            [
+                "dc065ae2d84719ed"
+            ]
+        ]
+    },
+    {
+        "id": "dc065ae2d84719ed",
+        "type": "http request",
+        "z": "236e5396b4f9e2cf",
+        "name": "httpGet_SendEmail",
+        "method": "GET",
+        "ret": "obj",
+        "paytoqs": "body",
+        "url": "",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "authType": "",
+        "x": 910,
+        "y": 760,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "45a5bd557a22e178",
+        "type": "inject",
+        "z": "236e5396b4f9e2cf",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 470,
+        "y": 760,
+        "wires": [
+            [
+                "8eebacd842f7114d"
+            ]
+        ]
+    },
+    {
+        "id": "053890d2ceaef8b0",
+        "type": "http request",
+        "z": "236e5396b4f9e2cf",
+        "name": "getHostedEMail_API",
+        "method": "GET",
+        "ret": "txt",
+        "paytoqs": "body",
+        "url": "https://api.sendgrid.com/v3/resource",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "authType": "bearer",
+        "x": 760,
+        "y": 120,
+        "wires": [
+            [
+                "4cc28543c8bae82d"
+            ]
+        ]
+    },
+    {
+        "id": "8739bd90a56a258c",
+        "type": "inject",
+        "z": "236e5396b4f9e2cf",
+        "name": "injEmail",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 380,
+        "y": 120,
+        "wires": [
+            [
+                "8fa014edbaac4868"
+            ]
+        ]
+    },
+    {
+        "id": "4cc28543c8bae82d",
+        "type": "debug",
+        "z": "236e5396b4f9e2cf",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 970,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "8fa014edbaac4868",
+        "type": "function",
+        "z": "236e5396b4f9e2cf",
+        "name": "fnSetMsgParams",
+        "func": "msg.payload= {\n                to: 'jlallyboy@gmail.com',\n                from: 'brendan.mcardle@gmail.com', // Use the email address or domain you verified above\n                subject: 'Bulk Tank Level Low',\n                text: 'Order Request for Delivery of Refrigerant _3',\n                html: '<strong>and easy to do anywhere, even with Node.js</strong>',\n            };\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "x": 550,
+        "y": 120,
+        "wires": [
+            [
+                "053890d2ceaef8b0",
+                "f4242deb39f9c64a"
+            ]
+        ]
+    },
+    {
+        "id": "f4242deb39f9c64a",
+        "type": "debug",
+        "z": "236e5396b4f9e2cf",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 760,
+        "y": 60,
+        "wires": []
+    },
+    {
+        "id": "c11b21ec6c9ec72e",
+        "type": "mqtt out",
+        "z": "236e5396b4f9e2cf",
+        "name": "",
+        "topic": "Brendan/Temp_OpenTest",
+        "qos": "0",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "f1cc2e7707467a52",
+        "x": 510,
+        "y": 1140,
+        "wires": []
+    },
+    {
+        "id": "c9a2dbac0fca19d3",
+        "type": "inject",
+        "z": "236e5396b4f9e2cf",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "[[3,bla,23:30",
+        "payloadType": "str",
+        "x": 170,
+        "y": 1140,
+        "wires": [
+            [
+                "c11b21ec6c9ec72e"
+            ]
+        ]
+    },
+    {
+        "id": "51b901c7c05754a0",
+        "type": "mqtt in",
+        "z": "236e5396b4f9e2cf",
+        "name": "weigh_Temp_Bridge",
+        "topic": "Brendan/Temp_OpenTest",
+        "qos": "0",
+        "datatype": "auto",
+        "broker": "f1cc2e7707467a52",
+        "nl": false,
+        "rap": false,
+        "inputs": 0,
+        "x": 250,
+        "y": 920,
+        "wires": [
+            [
+                "e9fef9d8cf6cb52c"
+            ]
+        ]
+    },
+    {
+        "id": "fccc84617ae0e1a3",
+        "type": "function",
+        "z": "236e5396b4f9e2cf",
+        "name": "fnPushWeightToServer",
+        "func": "//takes the JSON object and converts it to Javascript object so we can use it in the QueryString...\n//var jsonObj = msg.payload;\n//node.warn('What is payload');\n//node.warn(\"ID :\" + msg.tank.count);\n\n\n//node.warn('Tank Weight is : ' + msg.tank.weight);\nvar _weight     = msg.tank.weight;          //we are using temperature sensor instead...\nvar _timeStamp  = msg.tank.timeStamp;\nvar _ID         = msg.tank.count;\nconst NRcurrentDate=new Date();\n//var _weight=msg.tank.tankWeight;\n//node.warn(_weight);\n\n//msg.url     = \"localhost:3001/contacts/savebulktankweight?_weight=\"+ _weight;\nmsg.url     = \"localhost:3001/contacts/saveweighbridgeweight?_weight=\"+ _weight + \"&_timeStamp=\" + _timeStamp + \"&nr_timeStamp=\" + NRcurrentDate + \"&_ID=\" + _ID;\n\nnode.warn(\"  Temp_ID=\" + _ID + \" weight  \"+ _weight + \" & _timeStamp=\" + _timeStamp + \" & nr_timeStamp=\" + NRcurrentDate);\n\n//node.warn(msg.url);\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 860,
+        "y": 920,
+        "wires": [
+            [
+                "860d664dd6c3f431"
+            ]
+        ]
+    },
+    {
+        "id": "860d664dd6c3f431",
+        "type": "http request",
+        "z": "236e5396b4f9e2cf",
+        "name": "httpSaveTemp",
+        "method": "GET",
+        "ret": "obj",
+        "paytoqs": "body",
+        "url": "",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "authType": "",
+        "senderr": false,
+        "x": 1080,
+        "y": 920,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "dddc8f7b6d83288d",
+        "type": "debug",
+        "z": "236e5396b4f9e2cf",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1070,
+        "y": 840,
+        "wires": []
+    },
+    {
+        "id": "d9f20720731e75ed",
+        "type": "inject",
+        "z": "236e5396b4f9e2cf",
+        "name": "injJSON_Temp",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{\"weight\":26,\"timeStamp\":\"17:52\"}",
+        "payloadType": "json",
+        "x": 180,
+        "y": 1200,
+        "wires": [
+            [
+                "338d3c07d2f1484a"
+            ]
+        ]
+    },
+    {
+        "id": "338d3c07d2f1484a",
+        "type": "mqtt out",
+        "z": "236e5396b4f9e2cf",
+        "name": "",
+        "topic": "Brendan/Temp_OpenTest",
+        "qos": "0",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "f1cc2e7707467a52",
+        "x": 510,
+        "y": 1200,
+        "wires": []
+    },
+    {
+        "id": "e9fef9d8cf6cb52c",
+        "type": "function",
+        "z": "236e5396b4f9e2cf",
+        "name": "fnBuildWObj",
+        "func": "var jObjTank=JSON.parse(msg.payload);\nmsg.tank=jObjTank;\n//msg.tank.count=msg.tank.count;\n//node.warn(msg.tank);\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 470,
+        "y": 920,
+        "wires": [
+            [
+                "3fd25689d72879e5"
+            ]
+        ]
+    },
+    {
+        "id": "3fd25689d72879e5",
+        "type": "msg-resend",
+        "z": "236e5396b4f9e2cf",
+        "interval": "0",
+        "intervalUnit": "secs",
+        "maximum": "1",
+        "bytopic": false,
+        "clone": false,
+        "firstDelayed": false,
+        "addCounters": false,
+        "waitForResend": false,
+        "highRate": true,
+        "outputCountField": "",
+        "outputMaxField": "",
+        "name": "msgResend",
+        "x": 650,
+        "y": 920,
+        "wires": [
+            [
+                "fccc84617ae0e1a3"
+            ]
+        ]
+    },
+    {
+        "id": "d45c29c9f5484c5c",
+        "type": "mqtt in",
+        "z": "236e5396b4f9e2cf",
+        "name": "mqttBulkTank",
+        "topic": "Brendan/Tank_Open",
+        "qos": "0",
+        "datatype": "auto",
+        "broker": "f1cc2e7707467a52",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 270,
+        "y": 1040,
+        "wires": [
+            [
+                "8a94c81d486abb92"
+            ]
+        ]
+    },
+    {
+        "id": "8a94c81d486abb92",
+        "type": "counter",
+        "z": "236e5396b4f9e2cf",
+        "name": "",
+        "init": "0",
+        "step": "1",
+        "lower": null,
+        "upper": null,
+        "mode": "increment",
+        "outputs": "1",
+        "x": 460,
+        "y": 1040,
+        "wires": [
+            [
+                "a629d3b79de0ef7e"
+            ]
+        ]
+    },
+    {
+        "id": "f8c6a6ba4e8c81fc",
+        "type": "function",
+        "z": "236e5396b4f9e2cf",
+        "name": "fnPushBulkTankWeightToServer",
+        "func": "//takes the JSON object and converts it to Javascript object so we can use it in the QueryString...\n\n\nvar _weight     = msg.Bulktank.weight;          //we are using temperature sensor instead...\nvar _timeStamp  = msg.Bulktank.timeStamp;\nvar _ID         = msg.Bulktank.count;\nconst NRcurrentDate=new Date();\n//var _weight=msg.tank.tankWeight;\n//node.warn(_weight);\n\n//msg.url     = \"localhost:3001/contacts/savebulktankweight?_weight=\"+ _weight;\nmsg.url     = \"localhost:3001/contacts/savebulktankweight?_weight=\"+ _weight + \"&_timeStamp=\" + _timeStamp + \"&nr_timeStamp=\" + NRcurrentDate + \"&_ID=\" + _ID;\n\nnode.warn(\"  Tank_ID=\" + _ID + \" weight  \"+ _weight + \" & _timeStamp=\" + _timeStamp + \" & nr_timeStamp=\" + NRcurrentDate);\n\n//node.warn(msg.url);\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 890,
+        "y": 1040,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "a629d3b79de0ef7e",
+        "type": "function",
+        "z": "236e5396b4f9e2cf",
+        "name": "fnBuildTObj",
+        "func": "var arr = msg.payload.split(\",\");\n\n//Javascript Object literal\n//node.warn('timeStamp = ' + objPass.timeStamp);\nvar arrVal = arr[0].split(\"[[\");\n\nvar objBulkTank = {\n    weight: arrVal[1],\n    timeStamp: arr[2],\n    count:msg.count\n};\nmsg.Bulktank = objBulkTank;\n//node.warn(msg);\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 650,
+        "y": 1040,
+        "wires": [
+            [
+                "5c7d382cbecf7bd1",
+                "f8c6a6ba4e8c81fc"
+            ]
+        ]
+    },
+    {
+        "id": "acb0e9e9d9789aeb",
+        "type": "function",
+        "z": "236e5396b4f9e2cf",
+        "name": "fnBuildJSON",
+        "func": "var objPass={};\nvar arr=msg.payload.split(\",\");\n\n//Javascript Object literal\n//node.warn('timeStamp = ' + objPass.timeStamp);\nvar arrVal=arr[0].split(\"[[\");\n\n//Adding elemnt to an existing object\n//https://stackoverflow.com/a/736599/379804\n\nvar objTank={\n    tankWeight:arrVal[1],\n    timeStamp:arr[2]\n};\n\nmsg[\"Bulktank\"]=objTank;\n\nnode.warn(msg);\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 750,
+        "y": 1140,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "5c7d382cbecf7bd1",
+        "type": "debug",
+        "z": "236e5396b4f9e2cf",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 820,
+        "y": 1000,
+        "wires": []
+    },
+    {
+        "id": "b859347dab9e8f89",
+        "type": "http request",
+        "z": "236e5396b4f9e2cf",
+        "name": "httpSaveBulkWeight",
+        "method": "GET",
+        "ret": "obj",
+        "paytoqs": "body",
+        "url": "",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "authType": "",
+        "senderr": false,
+        "x": 1160,
+        "y": 1040,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "20806b7d.e589d4",
+        "type": "mqtt-broker",
+        "name": "hiveMQBroker",
+        "broker": "14a9eb8e23da40eca2300f99c9178d9e.s1.eu.hivemq.cloud",
+        "port": "8883",
+        "tls": "db08d6c3.e5c038",
+        "clientid": "noredconn1",
+        "usetls": true,
+        "compatmode": false,
+        "keepalive": "60",
+        "cleansession": false,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": ""
+    },
+    {
+        "id": "f1cc2e7707467a52",
+        "type": "mqtt-broker",
+        "name": "AWSM4_Broker",
+        "broker": "a17xznyrtcvxwq-ats.iot.us-east-1.amazonaws.com",
+        "port": "8883",
+        "tls": "87a7e675ac715518",
+        "clientid": "cliTK1",
+        "autoConnect": true,
+        "usetls": true,
+        "compatmode": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": false,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "willMsg": {},
+        "sessionExpiry": ""
+    },
+    {
+        "id": "402602645b5cf7de",
+        "type": "mqtt-broker",
+        "z": "1c3f162c.7f936a",
+        "name": "AWSM3_Broker",
+        "broker": "a17xznyrtcvxwq-ats.iot.us-east-1.amazonaws.com",
+        "port": "8883",
+        "tls": "8e43da28c56d8b66",
+        "clientid": "pub1",
+        "usetls": true,
+        "compatmode": false,
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": ""
+    },
+    {
+        "id": "db08d6c3.e5c038",
+        "type": "tls-config",
+        "name": "hihveMQConn",
+        "cert": "",
+        "key": "",
+        "ca": "",
+        "certname": "",
+        "keyname": "",
+        "caname": "isrgrootx1.pem",
+        "servername": "",
+        "verifyservercert": false
+    },
+    {
+        "id": "87a7e675ac715518",
+        "type": "tls-config",
+        "name": "cfg2",
+        "cert": "",
+        "key": "",
+        "ca": "",
+        "certname": "68273a143c-certificate.pem (1).crt",
+        "keyname": "68273a143c-private.pem (1).key",
+        "caname": "rootca.pem",
+        "servername": "",
+        "verifyservercert": true,
+        "alpnprotocol": ""
+    },
+    {
+        "id": "8e43da28c56d8b66",
+        "type": "tls-config",
+        "name": "AWSM2_Config",
+        "cert": "",
+        "key": "",
+        "ca": "",
+        "certname": "68273a143c-certificate.pem (1).crt",
+        "keyname": "68273a143c-private.pem (1).key",
+        "caname": "rootca.pem",
+        "servername": "",
+        "verifyservercert": true
+    }
+]

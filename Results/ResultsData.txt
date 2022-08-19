@@ -1,0 +1,114 @@
+Brendan McArdle 20211242 - Test Runs from Temp Sensor to Kaleido Blockchain
+
+MsgEvery10s
+=============
+Device Timestamp		Block ID		Kaleido		Duration
+"ID : 1-19-Wed Aug 17 2022 20:36:17 GMT+0100 (British Summer Time)"		51541	1tx per block	08:36:22		5 s
+						
+"ID : 2-19-Wed Aug 17 2022 20:36:27 GMT+0100 (British Summer Time)"		51543		08:36:32		5s
+						
+"ID : 3-19-Wed Aug 17 2022 20:36:37 GMT+0100 (British Summer Time)"		51545		08:36:42		5s
+						
+"ID : 4-19-Wed Aug 17 2022 20:36:47 GMT+0100 (British Summer Time)"		51547		08:36:52		5s
+						
+"ID : 5-19-Wed Aug 17 2022 20:36:57 GMT+0100 (British Summer Time)"		51549		08:37:02		5s
+						
+"ID : 6-19-Wed Aug 17 2022 20:37:08 GMT+0100 (British Summer Time)"		51551		08:37:12		5s
+						
+"ID : 7-19-Wed Aug 17 2022 20:37:17 GMT+0100 (British Summer Time)"		51553		08:37:22		5s
+						
+"ID : 8-19-Wed Aug 17 2022 20:37:27 GMT+0100 (British Summer Time)"		51555		08:37:32		5s
+						
+"ID : 9-19-Wed Aug 17 2022 20:37:37 GMT+0100 (British Summer Time)"		51557		08:37:42		5s
+						
+"ID : 10-19-Wed Aug 17 2022 20:37:47 GMT+0100 (British Summer Time)"	51559		08:37:52		5s
+
+
+MsgEvery5s
+===========
+Device TimeStamp		BlockID		Kaleido		Delay
+						
+ID : 1-19-Wed Aug 17 2022 21:15:13 GMT+0100 (British Summer Time)		52008		09:15:17		4s
+						
+ID : 2-19-Wed Aug 17 2022 21:15:18 GMT+0100 (British Summer Time)		52009		09:15:22		4s
+						
+ID : 3-19-Wed Aug 17 2022 21:15:23 GMT+0100 (British Summer Time)		52010		09:17:27		4s
+						
+ID : 4-19-Wed Aug 17 2022 21:15:28 GMT+0100 (British Summer Time)		52011		09:15:32		4s
+						
+ID : 5-19-Wed Aug 17 2022 21:15:33 GMT+0100 (British Summer Time)		52012		09:15:37		4s
+						
+ID : 6-19-Wed Aug 17 2022 21:15:38 GMT+0100 (British Summer Time)		52013		09:15:42		4s
+						
+ID : 7-19-Wed Aug 17 2022 21:15:43 GMT+0100 (British Summer Time)		52014		09:15:47		4s
+						
+ID : 8-19-Wed Aug 17 2022 21:15:48 GMT+0100 (British Summer Time)		52015		09:15:52		4s
+						
+ID : 9-19-Wed Aug 17 2022 21:15:53 GMT+0100 (British Summer Time)		52016		09:15:57		4s
+						
+ID : 10-19-Wed Aug 17 2022 21:15:58 GMT+0100 (British Summer Time)		52017		09:16:02		4s
+
+
+
+MsgEvery 1s
+============
+Device TimeStamp		Block ID		TimeStamp		duration
+						
+ID : 1-18-Wed Aug 17 2022 21:25:01 GMT+0100 (British Summer Time)		52126		09:25:07		6
+						
+ID : 2-18-Wed Aug 17 2022 21:25:02 GMT+0100 (British Summer Time)		52126		09:25:07		4
+						
+ID : 3-18-Wed Aug 17 2022 21:25:03 GMT+0100 (British Summer Time)		52126		09:25:07		4
+						
+ID : 4-18-Wed Aug 17 2022 21:25:04 GMT+0100 (British Summer Time)		52126		09:25:07		3
+						
+ID : 5-19-Wed Aug 17 2022 21:25:05 GMT+0100 (British Summer Time)		52127		09:25:12		7
+						
+ID : 6-18-Wed Aug 17 2022 21:25:06 GMT+0100 (British Summer Time)		52127		09:25:12		6
+						
+ID : 7-19-Wed Aug 17 2022 21:25:07 GMT+0100 (British Summer Time)		52127		09:25:12		5
+						
+ID : 8-19-Wed Aug 17 2022 21:25:08 GMT+0100 (British Summer Time)		52127		09:25:12		4
+						
+ID : 9-19-Wed Aug 17 2022 21:25:09 GMT+0100 (British Summer Time)		52127		09:25:12		3
+						
+ID : 10-19-Wed Aug 17 2022 21:25:10 GMT+0100 (British Summer Time)		52128		09:25:17		7
+
+
+10MsgBlock per s (every 10s)
+================================
+Device TimeStamp		Block		Time	Duration
+					
+ID : 29-18-Wed Aug 17 2022 21:44:39 GMT+0100 (British Summer Time)		52361		09:44:42	3
+					
+ID : 30-18-Wed Aug 17 2022 21:44:49 GMT+0100 (British Summer Time)					
+					
+ID : 31-18-Wed Aug 17 2022 21:44:59 GMT+0100 (British Summer Time)					
+					
+ID : 32-18-Wed Aug 17 2022 21:45:09 GMT+0100 (British Summer Time)					
+					
+ID : 32-18-Wed Aug 17 2022 21:45:09 GMT+0100 (British Summer Time)					
+					
+ID : 34-18-Wed Aug 17 2022 21:45:29 GMT+0100 (British Summer Time)					
+					
+ID : 35-18-Wed Aug 17 2022 21:45:39 GMT+0100 (British Summer Time)					
+					
+ID : 36-18-Wed Aug 17 2022 21:45:49 GMT+0100 (British Summer Time)					
+					
+ID : 37-18-Wed Aug 17 2022 21:45:59 GMT+0100 (British Summer Time)					
+					
+ID : 38-18-Wed Aug 17 2022 21:46:09 GMT+0100 (British Summer Time)					
+					
+ID : 39-18-Wed Aug 17 2022 21:46:19 GMT+0100 (British Summer Time)					
+					
+ID : 40-18-Wed Aug 17 2022 21:46:29 GMT+0100 (British Summer Time)					
+					
+					
+					
+					
+					
+Race condition reported on github with the web3 library : https://github.com/ChainSafe/web3.js/issues/3556					
+https://github.com/ChainSafe/web3.js/issues/2213					
+
+
+
